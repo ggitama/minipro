@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+	
+	<div class="container">
+  <h2>Ini login</h2>
+  <form action="/signin"  method="post">
+    <div class="form-group">
+      <label for="email">Nama:</label>
+      <input type="text" class="form-control" placeholder="Enter nama" name="nama">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+       <input type="password" id="password" class="form-control" placeholder="password" required="required"  name="pass" size="30" maxlength="50" autofocus value="">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+   <div class="form-group form-check">
+        <input class="form-check-input" id="chk" type="checkbox"> Show Password
+        <label class="form-check-label label" id="showhide"> </label>
+    </div> 
+    <button type="submit" class="btn btn-primary">Masuk</button>
+  </form>
+</div>
+
+</body>
+<script src="../bootstrap/dist/js/jquery.min.js"></script>
+<script src="../js/jquery-ui.js" ></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bootbox/bootbox.min.js"></script>
+<link href="../css/jquery.dataTables.min.css" rel="stylesheet">
+<script>
+var masukanpass = document.getElementById('password'),
+chk  = document.getElementById('chk'),
+label = document.getElementById('showhide');
+
+
+chk.onclick = function () {
+
+if(chk.checked) {
+     masukanpass.setAttribute('type', 'text');
+     label.textContent = 'Hide Password';
+ } else {
+     masukanpass.setAttribute('type', 'password');
+     label.textContent = 'Show Password';
+ }
+}
+
+</script>
+
+
+</html>

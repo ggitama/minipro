@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<br>
+	<div id="boxcari">
+		<input type="search" id="pelamarname" name="cari"
+			placeholder="Nama Pelamar" size="80" onchange="loadproductlist()" />
+		<button type="button" class="btn btn-primary" id="btn-search"
+			onclick="loadpelamarlist()">Cari</button>
+		<input type="reset" class="btn btn-primary" id="btn-reset"
+			value="Reset" onclick="resetsearch()" />
+	</div>
+	<div align="right">
+		<span class="field icon"><button id="btn-sort"
+				class="glyphicon glyphicon-sort-by-alphabet icon-space"
+				onclick="sortTable(0)"></button>
+			<button class="glyphicon glyphicon-menu-hamburger icon-space"></button>
+			<button id="btn-add" class="glyphicon glyphicon-plus-sign icon-space"></button>
+		</span>
+	</div>
+	<br>
+	<div id="pelamarlist"></div>
+	<br>
+	<!--  	<div class="pagination" align = "right">
+		<a href="#">&laquo; Previous</a> <a href="#">Next &raquo;</a>
+	</div>-->
+	<!-- The Modal -->
+	<div class="container">
+		<div class="modal fade" id="pelamarModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content"
+					style="border-radius: 10px 10px 7px 7px; border: 2px solid rgb(0, 0, 102);">
+
+					<div class="modal-header"
+						style="background-color: rgb(0, 0, 102); border-radius: 5px 5px 0px 0px; color: white;">
+						<!-- Modal Header -->
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Detail Pelamar</h3>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="box-body" id="nonpelamarlist"></div>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<!--	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	loadpelamarlist();
+	resetsearch();
+	//sortTable();
+	
+
+	function loadpelamarlist() {
+		var alamt = document.getElementById("pelamarname").value;
+		if (alamt == "") {
+			url = "pelamarlist";
+		} else {
+			url = "pelamarlistbynama/" + alamt;
+		}
+
+		$.ajax({
+			url : url,
+			type : 'get',
+			dataType : 'html',
+			success : function(result) {
+				$('#pelamarlist').html(result);
+			}
+		});
+	}
+
+	function resetsearch() {
+		var alamat = document.getElementById("pelamarname").value;
+
+		url = "pelamarlist";
+		document.getElementById("pelamarname").value = "";
+
+		$.ajax({
+			url : url,
+			type : 'get',
+			dataType : 'html',
+			success : function(result) {
+				$('#pelamarlist').html(result);
+			}
+		});
+	}
+	
+	
+/* 	function sortTable(n) {
+		var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+		table = document.getElementById("pelamarlisttb");
+		switching = true;
+		// Set the sorting direction to ascending:
+		dir = "asc";
+		while (switching) {
+			// Start by saying: no switching is done:
+			switching = false;
+			rows = table.rows;
+			for (i = 1; i < (rows.length - 1); i++) 
+				shouldSwitch = false;
+				x = rows[i].getElementsByTagName("TD")[n];
+				y = rows[i + 1].getElementsByTagName("TD")[n];
+				if (dir == "asc") {
+					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						shouldSwitch = true;
+						break;
+					}
+				} else if (dir == "desc") {
+					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+
+						shouldSwitch = true;
+						break;
+					}
+				}
+			}
+			if (shouldSwitch) {
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+				// Each time a switch is done, increase this count by 1:
+				switchcount++;
+			} else {
+				if (switchcount == 0 && dir == "asc") {
+					dir = "desc";
+					switching = true;
+				}
+			}
+		}
+	} */
+</script>
+</html>

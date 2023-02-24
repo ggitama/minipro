@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="col-md-2 sidebar">
+		<ul class="list-group">
+			<li><a href="/pelamar" class="list-group-item">Pelamar</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10 content">
+        <div id="fragment1"></div>
+    </div>
+</body>
+<script>
+
+$('.list-group-item').click(function(){
+	var url=$(this).attr('href');
+	$.ajax({
+		url : url,
+		type : 'get',
+		dataType : 'html',
+		success : function(result) {
+			$('#fragment1').html(result);
+		}
+	});
+	return false;
+});
+</script>
+</html>
